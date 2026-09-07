@@ -1,0 +1,19 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# production build
+/build
+
+# environment
+.env
+.env.local
+.env.development.local
+.env.test.local
+# keep .env.production for deployment config (no secrets in it)
+
+# misc
+.DS_Store
+*.log
+npm-debug.log*

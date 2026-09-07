@@ -1,0 +1,115 @@
+/* Footer styles — fonts via CSS custom properties from index.css */
+
+/* ── Footer shell ── */
+.footer {
+  background: #fbdfd4;
+  color: #1a0505;
+  font-family: var(--font-primary);
+}
+
+/* ── Footer logo ── */
+.footer-brand-logo {
+  margin-bottom: 1.25rem;
+}
+
+.footer-logo {
+  height: 9rem;
+  width: auto;
+  max-width: 280px;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3)) brightness(1.1);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.footer-logo:hover {
+  opacity: 0.85;
+  transform: scale(1.02);
+}
+
+/* ── Section headings ── */
+.footer h3 {
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #1a0505;
+  border-left: 3px solid #450a0a;
+  padding-left: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ── Links (nav/text links only — not social icons) ── */
+.footer a:not(.footer-social-icon) {
+  font-family: var(--font-primary);
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #5a2020;
+  text-decoration: none;
+  transition: color 0.2s ease, padding-left 0.2s ease;
+  display: inline-block;
+}
+
+.footer a:not(.footer-social-icon):hover {
+  color: #450a0a;
+  padding-left: 4px;
+}
+
+/* ── Contact text ── */
+.footer span {
+  font-family: var(--font-primary);
+  font-size: 0.9rem;
+  color: #5a2020;
+  line-height: 1.6;
+}
+
+/* ── Description text ── */
+.footer p {
+  font-family: var(--font-primary);
+  font-size: 0.9rem;
+  color: #5a2020;
+  line-height: 1.7;
+}
+
+/* ── Social icons ── */
+.footer-social-icon {
+  background: rgba(69, 10, 10, 0.08);
+  border: 1px solid rgba(69, 10, 10, 0.2);
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  display: flex !important;        /* override .footer a display:inline-block */
+  align-items: center !important;
+  justify-content: center !important;
+  color: #450a0a;
+  padding: 0 !important;           /* remove any inherited padding */
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.footer-social-icon svg {
+  display: block;
+  flex-shrink: 0;
+}
+
+.footer-social-icon:hover {
+  background: #450a0a;
+  border-color: #450a0a;
+  color: #fbdfd4;
+  transform: translateY(-3px);
+  padding-left: 0 !important;
+}
+
+/* ── Divider ── */
+.footer-divider {
+  border-color: rgba(69, 10, 10, 0.15);
+}
+
+/* ── Bottom bar ── */
+.footer-bottom-text {
+  font-family: var(--font-primary);
+  font-size: 0.82rem;
+  color: #7a3535;
+  letter-spacing: 0.02em;
+}

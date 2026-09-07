@@ -1,0 +1,291 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Serif:ital,wght@0,400;0,600;1,400&family=Playwrite+DE+Grund:wght@100;200;300;400&display=swap');
+
+:root {
+  --color-primary: #450a0a;
+  --color-secondary: #c2baba;
+  --color-accent: #c2baba;
+  --color-dark: #1a0505;
+  --color-light: #fdf8f8;
+  --font-primary: 'Lora', 'Noto Serif', Georgia, serif;
+  --font-secondary: 'Noto Serif', Georgia, serif;
+  --font-accent: 'Playwrite DE Grund', cursive;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #ffffff;
+  line-height: 1.75;
+  font-size: 1.0625rem; /* 17px — up from 16px for better readability */
+}
+
+/* Enhanced Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  color: var(--color-dark);
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: clamp(2.6rem, 6vw, 4rem);
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  color: var(--color-dark);
+}
+
+h3 {
+  font-size: clamp(1.35rem, 2.5vw, 1.9rem);
+  color: var(--color-dark);
+}
+
+h4 {
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+}
+
+p {
+  font-size: clamp(1rem, 1.2vw, 1.125rem); /* 16–18px fluid */
+  line-height: 1.85;
+  color: #4a3535;
+  margin-bottom: 1.5rem;
+  font-weight: 400;
+}
+
+/* Section body copy — larger comfortable reading size */
+section p,
+.section-body {
+  font-size: clamp(1.05rem, 1.3vw, 1.15rem);
+  line-height: 1.85;
+}
+
+/* Card / description text */
+.card-text,
+.text-gray-600,
+.text-gray-500 {
+  font-size: clamp(0.95rem, 1.15vw, 1.05rem);
+}
+
+/* Labels, nav, small UI text — keep readable but not oversized */
+label {
+  font-size: 0.95rem;
+}
+
+/* Input / form text */
+input, textarea, select {
+  font-size: 1rem;
+  font-family: var(--font-primary);
+}
+
+/* Construction-Themed Animations */
+@keyframes constructionRise {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes blueprintReveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) rotate(-2deg);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  }
+}
+
+@keyframes craneLift {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes concretePour {
+  0% {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes steelGirder {
+  0% {
+    transform: rotateX(-90deg);
+    opacity: 0;
+  }
+  100% {
+    transform: rotateX(0);
+    opacity: 1;
+  }
+}
+
+/* Animation Classes */
+.construction-rise {
+  animation: constructionRise 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.blueprint-reveal {
+  animation: blueprintReveal 1s ease-out forwards;
+}
+
+.crane-lift {
+  animation: craneLift 3s ease-in-out infinite;
+}
+
+.concrete-pour {
+  animation: concretePour 1.2s ease-out forwards;
+  transform-origin: left;
+}
+
+.steel-girder {
+  animation: steelGirder 1s ease-out forwards;
+  transform-style: preserve-3d;
+}
+
+/* Construction-themed utility classes */
+.bg-blueprint {
+  background: linear-gradient(45deg, #e2e8f0 25%, transparent 25%, transparent 75%, #e2e8f0 75%),
+              linear-gradient(45deg, #e2e8f0 25%, transparent 25%, transparent 75%, #e2e8f0 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
+}
+
+.border-concrete {
+  border: 3px solid #cbd5e0;
+  border-image: linear-gradient(45deg, #a0aec0, #e2e8f0) 1;
+}
+
+.text-steel {
+  background: linear-gradient(135deg, #4a5568, #718096);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.shadow-construction {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Enhanced button styles */
+.btn-construction {
+  background: linear-gradient(135deg, var(--color-primary), #6b1010);
+  color: white;
+  font-weight: 600;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(69, 10, 10, 0.35);
+}
+
+.btn-construction:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(69, 10, 10, 0.5);
+  background: linear-gradient(135deg, #6b1010, var(--color-primary));
+}
+
+.btn-construction:active {
+  transform: translateY(-1px);
+}
+
+.floating {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* ── Click ripple ── */
+.click-ripple {
+  position: fixed;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(69, 10, 10, 0.35) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 9999;
+  animation: ripple-burst 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes ripple-burst {
+  0%   { transform: scale(0);   opacity: 1; }
+  60%  { transform: scale(3.5); opacity: 0.5; }
+  100% { transform: scale(5);   opacity: 0; }
+}
+
+/* ── Button / link press feedback ── */
+a, button {
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+a:active, button:active {
+  transform: scale(0.96);
+}
+
+/* ── Global layout improvements ── */
+
+/* Ensure page content is always centered within its container */
+.page-section {
+  width: 100%;
+}
+
+/* Center section headings and subtext by default */
+.section-center {
+  text-align: center;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Fix paragraph color/weight globally for body copy */
+p {
+  color: #4a3535;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Make focus outlines visible and branded */
+*:focus-visible {
+  outline: 2px solid #450a0a;
+  outline-offset: 2px;
+}
+
+/* Prevent text overflow on small screens */
+.container {
+  word-break: break-word;
+}
+
+/* Font utility classes */
+.font-accent {
+  font-family: var(--font-accent);
+}
+
+.font-secondary {
+  font-family: var(--font-secondary);
+}
