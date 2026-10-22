@@ -45,6 +45,27 @@ const TestimonialCard = ({ item, index }) => {
         "{item.text}"
       </p>
 
+      {/* Video if present */}
+      {item.video && (
+        <div className="mb-5 rounded-xl overflow-hidden">
+          {item.video.startsWith('http') ? (
+            <video
+              src={item.video}
+              controls
+              className="w-full rounded-xl max-h-64 object-cover"
+              preload="metadata"
+            />
+          ) : (
+            <video
+              src={`${process.env.REACT_APP_API_URL || ''}/uploads/${item.video}`}
+              controls
+              className="w-full rounded-xl max-h-64 object-cover"
+              preload="metadata"
+            />
+          )}
+        </div>
+      )}
+
       {/* Stars (decorative — 5 stars) */}
       <div className="flex gap-0.5 mb-5">
         {[...Array(5)].map((_, i) => (

@@ -191,6 +191,7 @@ const AdminPortal = () => {
   const [editingTestimonial,  setEditingTestimonial]  = useState(null);
   const [testimonialForm, setTestimonialForm] = useState({ name: '', category: 'client', designation: '', text: '', published: true });
   const [testimonialPhoto, setTestimonialPhoto] = useState(null);
+  const [testimonialVideo, setTestimonialVideo] = useState(null);
   const [testimonialMsg,   setTestimonialMsg]   = useState({ t: '', text: '' });
 
   const adminUser = getUser();
@@ -349,6 +350,7 @@ const AdminPortal = () => {
     const fd = new FormData();
     Object.entries(testimonialForm).forEach(([k, v]) => fd.append(k, v));
     if (testimonialPhoto) fd.append('photo', testimonialPhoto);
+    if (testimonialVideo) fd.append('video', testimonialVideo);
     const url    = editingTestimonial ? `${API_BASE_URL}/testimonials/${editingTestimonial._id}` : `${API_BASE_URL}/testimonials`;
     const method = editingTestimonial ? 'PUT' : 'POST';
     try {
@@ -356,7 +358,7 @@ const AdminPortal = () => {
       const data   = await res.json();
       if (res.ok && data.success) {
         setTestimonialMsg({ t: 'ok', text: editingTestimonial ? 'Testimonial updated!' : 'Testimonial added!' });
-        setShowTestimonialForm(false); setEditingTestimonial(null); setTestimonialPhoto(null);
+        setShowTestimonialForm(false); setEditingTestimonial(null); setTestimonialPhoto(null); setTestimonialVideo(null);
         setTestimonialForm({ name: '', category: 'client', designation: '', text: '', published: true });
         fetchAll(); setTimeout(() => setTestimonialMsg({ t: '', text: '' }), 4000);
       } else {
@@ -372,6 +374,7 @@ const AdminPortal = () => {
     setEditingTestimonial(t);
     setTestimonialForm({ name: t.name, category: t.category, designation: t.designation || '', text: t.text, published: t.published });
     setTestimonialPhoto(null);
+    setTestimonialVideo(null);
     setShowTestimonialForm(true);
   };
 
@@ -936,6 +939,7 @@ const AdminPortal = () => {
                       setEditingTestimonial(null);
                       setTestimonialForm({ name: '', category: 'client', designation: '', text: '', published: true });
                       setTestimonialPhoto(null);
+                      setTestimonialVideo(null);
                       setShowTestimonialForm(true);
                     }}
                     className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white rounded-lg transition" style={{ background: '#450a0a' }}>
@@ -975,6 +979,13 @@ const AdminPortal = () => {
                           {testimonialPhoto && <p className="text-xs text-gray-400 mt-1">Selected: {testimonialPhoto.name}</p>}
                           {editingTestimonial?.photo && !testimonialPhoto && <p className="text-xs text-gray-400 mt-1">Current: {editingTestimonial.photo}</p>}
                         </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-semibold text-gray-600 mb-1">Video (optional)</label>
+                        <input type="file" accept="video/*" onChange={e => setTestimonialVideo(e.target.files[0])}
+                          className="w-full text-sm text-gray-500 file:mr-3 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-red-50 file:text-red-700 hover:file:bg-red-100" />
+                        {testimonialVideo && <p className="text-xs text-gray-400 mt-1">Selected: {testimonialVideo.name}</p>}
                       </div>
 
                       <div>

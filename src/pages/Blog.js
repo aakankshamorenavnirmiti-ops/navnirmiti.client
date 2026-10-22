@@ -8,6 +8,7 @@ import { imageUrl } from '../utils/fileUrl';
 const Blog = () => {
   const [blogPosts, setBlogPosts] = useState([]);
   const [loading,   setLoading]   = useState(true);
+  const [selectedPost, setSelectedPost] = useState(null);
 
   useEffect(() => {
     const load = async () => {
@@ -165,7 +166,8 @@ const Blog = () => {
                       </div>
 
                       {/* Read more arrow */}
-                      <span
+                      <button
+                        onClick={(e) => { e.stopPropagation(); setSelectedPost(post); }}
                         className="flex items-center gap-2 font-semibold text-sm group-hover:gap-3 transition-all duration-200"
                         style={{ color: '#450a0a' }}
                       >
@@ -173,7 +175,7 @@ const Blog = () => {
                         <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                         </svg>
-                      </span>
+                      </button>
                     </div>
                   </div>
                 </article>
@@ -222,6 +224,55 @@ const Blog = () => {
           </div>
         </div>
       </section>
+
+      {/* Article reader modal */}
+      {selectedPost && (
+        <div
+          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4"
+          style={{ background: 'rgba(10,2,2,0.8)', backdropFilter: 'blur(4px)' }}
+          onClick={() => setSelectedPost(null)}
+        >
+          <div
+            className="bg-white w-full sm:rounded-2xl sm:max-w-3xl max-h-screen sm:max-h-[90vh] overflow-y-auto shadow-2xl"
+            onClick={e => e.stopPropagation()}
+          >
+            {/* Cover image */}
+            {selectedPost.image && (
+              <img
+                src={imageUrl(selectedPost.image)}
+                alt={selectedPost.title}
+                className="w-full h-64 object-cover"
+              />
+            )}
+            <div className="px-8 py-8">
+              {/* Category + close */}
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-xs font-bold px-3 py-1 rounded-full text-white" style={{ background: '#450a0a' }}>
+                  {selectedPost.category}
+                </span>
+                <button onClick={() => setSelectedPost(null)} className="text-gray-400 hover:text-gray-700 text-2xl leading-none">&times;</button>
+              </div>
+              {/* Title */}
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 leading-tight">{selectedPost.title}</h2>
+              {/* Meta */}
+              <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 mb-6 pb-6 border-b border-gray-100">
+                <span className="flex items-center gap-1.5">
+                  <span className="w-7 h-7 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0" style={{ background: '#450a0a' }}>
+                    {selectedPost.author?.charAt(0).toUpperCase()}
+                  </span>
+                  {selectedPost.author}
+                </span>
+                <span>{new Date(selectedPost.date || selectedPost.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+                <span>{selectedPost.readTime || '5 min read'}</span>
+              </div>
+              {/* Content */}
+              <div className="prose prose-gray max-w-none text-gray-700 leading-relaxed whitespace-pre-wrap text-base">
+                {selectedPost.content}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       <Footer />
     </div>
